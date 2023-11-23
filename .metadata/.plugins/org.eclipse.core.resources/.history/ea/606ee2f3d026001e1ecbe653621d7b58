@@ -1,0 +1,17 @@
+package org.jsp.controller;
+
+import java.util.Scanner;
+
+import org.jsp.dao.ProductDao;
+import org.jsp.dao.UserDao;
+
+public class userController {
+	static Scanner s = new Scanner(System.in);
+	static ProductDao pdao = new ProductDao();
+	static UserDao udao = new UserDao();
+
+	public static void main(String[] args) {
+
+	}
+
+}

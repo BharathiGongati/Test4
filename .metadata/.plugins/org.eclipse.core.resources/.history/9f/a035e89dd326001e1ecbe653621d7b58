@@ -1,0 +1,96 @@
+package org.jsp.controller;
+
+import java.util.Scanner;
+
+import org.jsp.dao.ProductDao;
+import org.jsp.dao.UserDao;
+import org.jsp.dto.Product;
+import org.jsp.dto.User;
+
+public class userController {
+	static Scanner s = new Scanner(System.in);
+	static ProductDao pdao = new ProductDao();
+	static UserDao udao = new UserDao();
+	
+
+	public static void main(String[] args) {
+		System.out.println("enter num for cases");
+		System.out.println("save user:1");
+		System.out.println("save product:2");
+		System.out.println("update user :3");
+		int id = s.nextInt();
+		switch (id) {
+		case 1: {
+			saveUser();
+			break;
+		}
+		case 2: {
+			addproduct();
+			break;
+		}
+		case 3: {
+			updateuser();
+			break;
+		}
+
+		}
+
+	}
+
+	
+	public static void saveUser() {
+		User u = new User();
+		System.out.println("enter the name,email,phone,password");
+		String name = s.next();
+		String email = s.next();
+		long phone = s.nextLong();
+		String password = s.next();
+
+		u.setName(name);
+		u.setEmail(email);
+		u.setPhone(phone);
+		u.setPassword(password);
+		udao.saveuser(u);
+		System.out.println("record saved");
+	}
+
+	public static void addproduct() {
+		Product p = new Product();
+		System.out.println("enter user id to add the product");
+		int uid=s.nextInt();
+		System.out.println("enter the name,brand,discription,category,price");
+		String name = s.next();
+		String brand = s.next();
+		String discription = s.next();
+		String category = s.next();
+		int price=s.nextInt();
+		p.setName(name);
+		p.setBrand(brand);
+		p.setDescription(discription);
+		p.setCategory(category);
+		p.setPrice(price);
+		pdao.addproduct(p, uid);
+		System.out.println("product added");
+		
+	}
+	public static void updateuser() {
+		User u = new User();
+		System.out.println("enter the id, name,email,phone,password");
+		int id=s.nextInt();
+		String name = s.next();
+		String email = s.next();
+		long phone = s.nextLong();
+		String password = s.next();
+        u.setId(id);
+		u.setName(name);
+		u.setEmail(email);
+		u.setPhone(phone);
+		u.setPassword(password);
+		udao.updaeuser(u);
+		System.out.println("record updated");
+		
+	}
+
+	
+
+}

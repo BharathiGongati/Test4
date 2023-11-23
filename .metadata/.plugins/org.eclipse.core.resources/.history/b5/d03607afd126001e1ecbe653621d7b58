@@ -1,0 +1,48 @@
+package org.jsp.controller;
+
+import java.util.Scanner;
+
+import org.jsp.dao.ProductDao;
+import org.jsp.dao.UserDao;
+import org.jsp.dto.User;
+
+public class userController {
+	static Scanner s = new Scanner(System.in);
+	static ProductDao pdao = new ProductDao();
+	static UserDao udao = new UserDao();
+
+	public static void main(String[] args) {
+		System.out.println("enter num for cases");
+		int id = s.nextInt();
+		switch (id) {
+		case 1: {
+			saveUser();
+			break;
+		}
+		case 2: {
+			addproduct();
+			break;
+		}
+		
+		
+
+		}
+
+	}
+
+	public static void saveUser() {
+		User u = new User();
+		String name = s.next();
+		String email = s.next();
+		long phone = s.nextLong();
+		String password = s.next();
+		System.out.println("enter the name,email,phone,password");
+		u.setName(name);
+		u.setEmail(email);
+		u.setPhone(phone);
+		u.setPassword(password);
+		udao.saveuser(u);
+		System.out.println("record saved");
+	}
+
+}

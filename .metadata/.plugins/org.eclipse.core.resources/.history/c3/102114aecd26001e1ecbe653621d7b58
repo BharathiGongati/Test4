@@ -1,0 +1,9 @@
+package org.jsp.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
+public class UserDao {
+	EntityManager manager=Persistence.createEntityManagerFactory("dev").createEntityManager();
+
+}

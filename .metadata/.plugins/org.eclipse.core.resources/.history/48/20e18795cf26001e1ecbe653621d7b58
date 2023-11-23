@@ -1,0 +1,23 @@
+package org.jsp.dao;
+
+import java.util.ArrayList;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
+import org.jsp.dto.Product;
+import org.jsp.dto.User;
+
+public class ProductDao {
+	EntityManager manager=Persistence.createEntityManagerFactory("dev").createEntityManager();
+	public void addproduct(Product pro,int id) {
+		System.out.println("enter the user id to add product");
+		User u=manager.find(User.class, id);
+		if(u!=null) {
+			ArrayList<Product> p=new ArrayList<Product>();
+		    p.add(pro);
+		}
+
+	}
+
+}

@@ -1,0 +1,184 @@
+package org.jsp.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import org.jsp.dao.ProductDao;
+import org.jsp.dao.UserDao;
+import org.jsp.dto.Product;
+import org.jsp.dto.User;
+
+public class userController {
+	static Scanner s = new Scanner(System.in);
+	static ProductDao pdao = new ProductDao();
+	static UserDao udao = new UserDao();
+	
+
+	public static void main(String[] args) {
+		System.out.println("enter num for cases");
+		System.out.println("save user:1");
+		System.out.println("save product:2");
+		System.out.println("update user :3");
+		System.out.println("verify user by phone and password :4");
+		System.out.println("verify user by email and password :5");
+		System.out.println("find product by user id:6");
+		System.out.println("find product by category :7");
+		int id = s.nextInt();
+		switch (id) {
+		case 1: {
+			saveUser();
+			break;
+		}
+		case 2: {
+			addproduct();
+			break;
+		}
+		case 3: {
+			updateuser();
+			break;
+		}
+		case 4: {
+			finduser();
+			break;
+		}
+		case 5: {
+			finduser2();
+			break;
+		}
+		case 6: {
+			findproduct();
+			break;
+		}
+		case 7: {
+			finduser2();
+			break;
+		}
+		case 8: {
+			finduser3();
+			break;
+		}
+
+		}
+
+	}
+
+	
+	
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	public static void saveUser() {
+		User u = new User();
+		System.out.println("enter the name,email,phone,password");
+		String name = s.next();
+		String email = s.next();
+		long phone = s.nextLong();
+		String password = s.next();
+
+		u.setName(name);
+		u.setEmail(email);
+		u.setPhone(phone);
+		u.setPassword(password);
+		udao.saveuser(u);
+		System.out.println("record saved");
+	}
+
+	public static void addproduct() {
+		Product p = new Product();
+		System.out.println("enter user id to add the product");
+		int uid=s.nextInt();
+		System.out.println("enter the name,brand,discription,category,price");
+		String name = s.next();
+		String brand = s.next();
+		String discription = s.next();
+		String category = s.next();
+		int price=s.nextInt();
+		p.setName(name);
+		p.setBrand(brand);
+		p.setDescription(discription);
+		p.setCategory(category);
+		p.setPrice(price);
+		pdao.addproduct(p, uid);
+		System.out.println("product added");
+		
+	}
+	public static void updateuser() {
+		User u = new User();
+		System.out.println("enter the id, name,email,phone,password");
+		int id=s.nextInt();
+		String name = s.next();
+		String email = s.next();
+		long phone = s.nextLong();
+		String password = s.next();
+        u.setId(id);
+		u.setName(name);
+		u.setEmail(email);
+		u.setPhone(phone);
+		u.setPassword(password);
+		udao.updaeuser(u);
+		System.out.println("record updated");
+		
+	}
+	public static void finduser() {
+		System.out.println("enter phone password to find user");
+		long phone=s.nextLong();
+		String password=s.next();
+		
+		User u=udao.verifyUser(phone, password);
+		System.out.println(u);
+		
+		
+	}
+	public static void finduser2() {
+		System.out.println("enter email password to find user");
+		String email=s.next();
+		String password=s.next();
+		
+		List<User> u=udao.verifyUser(email, password);
+		for(User u1:u) {
+			System.out.println(u1);
+		}
+		
+		
+	}
+	public static void findproduct() {
+        int id=s.nextInt();
+        List<Product> p =pdao.findproduct(id);
+        for(Product u1:p) {
+			System.out.println(u1);
+		}
+        
+
+		
+        
+	}
+	public static void finduser3() {
+		System.out.println("enter the category");
+       String catagery=s.next();
+       List<Product> p=pdao.findproduct(catagery);
+       for(Product u1:p) {
+			System.out.println(u1);
+		}
+       
+	}
+
+	
+
+	
+
+}

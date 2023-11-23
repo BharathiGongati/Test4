@@ -1,0 +1,42 @@
+package org.jsp.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import org.jsp.dto.User;
+
+public class UserDao {
+	EntityManager manager=Persistence.createEntityManagerFactory("dev").createEntityManager();
+	public User saveuser(User user) {
+		EntityTransaction t=manager.getTransaction();
+		manager.persist(user);
+		t.begin();
+		t.commit();
+		
+		return user;
+		
+
+	}
+	public User updaeuser(User user) {
+		EntityTransaction t=manager.getTransaction();
+		manager.merge(user);
+		t.begin();
+		t.commit();
+		
+		return user;
+		
+
+	}
+	public User verifyUser(long phone,String password) {
+		String qry="select u from User u where u.phone=?1 and u.password=?2";
+		EntityTransaction t=manager.getTransaction();
+		return null;
+		
+		
+
+	}
+	
+	
+
+}

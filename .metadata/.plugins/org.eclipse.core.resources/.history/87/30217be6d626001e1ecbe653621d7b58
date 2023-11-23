@@ -1,0 +1,62 @@
+package org.jsp.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import org.jsp.dto.User;
+
+
+public class UserDao {
+	EntityManager manager;
+	public User saveuser(User user) {
+		EntityTransaction t=manager.getTransaction();
+		manager.persist(user);
+		t.begin();
+		t.commit();
+		
+		return user;
+		
+
+	}
+	public User updaeuser(User user) {
+		EntityTransaction t=manager.getTransaction();
+		manager.merge(user);
+		t.begin();
+		t.commit();
+		
+		return user;
+		
+
+	}
+	public User verifyUser(long phone,String password) {
+		String qry="select u from User u where u.phone=?1 and u.password=?2";
+		Query q=manager.createQuery(qry);
+		q.setParameter(1, phone);
+		q.setParameter(2,password );
+		
+		return (User) q.getSingleResult();
+		
+		
+
+	}
+	public List verifyUser(String email,String password) {
+		String qry="select u from User u where u.email=?1 and u.password=?2";
+		Query q=manager.createQuery(qry);
+		q.setParameter(1, email);
+		q.setParameter(2,password );
+		
+		return q.getResultList();
+		
+		
+
+	}
+	
+	
+	
+	
+
+}
